@@ -5,7 +5,37 @@ def get_date_list(start, end):
     return date_list
 #print(ts.__version__)
 #print(get_date_list("2018-01-01","2018-11-26"))
-#print(ts.get_sina_dd('300054', date='2018-11-26'))
+data=ts.get_sina_dd('002354', date='2018-11-27')
+print(data)
+buys=0
+buysCount=0
+sells=0
+sellsCount=0
+neutral=0
+neutralCount=0
+i=0
+j=0
+k=0
+for index, row in data.iterrows():
+    count=int(row['volume'])
+    type=row['type']
+    preprice=row['preprice']
+    price=row['price']
+    if type=="买盘":
+        buys+=count
+        buysCount+=count*price
+        i+=1
+    elif type=="卖盘":
+        sells+=count
+        sellsCount += count * price
+        j+=1
+    else:
+        neutral+=count
+        neutralCount += count * price
+        k+=1
+print("买盘:",buys,"笔数:",i,"平均价:",buysCount/buys)
+print("卖盘:", sells,"笔数:",j,"平均价:",sellsCount/sells)
+print("中性盘:", neutral,"笔数:",k,"平均价:",neutralCount/neutral)
 #print(ts.get_sina_dd('300315', date='2018-11-26'))
 #ts.get_today_all()
 #print(ts.get_tick_data('300054',date='2018-11-26'))
@@ -16,6 +46,8 @@ data = pro.stock_basic(exchange='', list_status='L', fields='symbol')
 #print(data)
 #print(type(data))
 #date_list=get_date_list("2018-01-01","2018-11-26")
-for index, row in data.iterrows():
-    print(row['symbol'])
-    #print(ts.get_sina_dd(data[i]),date="2018-11-26")
+
+
+#for index, row in data.iterrows():
+#    print(row['symbol'])
+#    print(ts.get_sina_dd(row['symbol']),date="2018-11-26")

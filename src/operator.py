@@ -16,7 +16,10 @@ def get_bigdata_intofile_for_code_and_date(c,d):
     csv_write = csv.writer(out, dialect='excel')
 
     data = ts.get_sina_dd(c, date=d)
-
+    # print(data)
+    # if data==None:
+    #     pass
+    # else:
     for index, row in data.iterrows():
         csv_write.writerow(row)
 
@@ -39,15 +42,21 @@ def get_codelist(filename):
     return csv.reader(open(filename,'r'))
 
 def get_bigdata_for_date(c):
-    datelist=get_date_list('2018-11-30','2018-11-30')
+    datelist=get_date_list('2018-11-14','2018-12-04')
 
     for date in datelist:
-        get_bigdata_intofile_for_code_and_date(c,date)
+        print(date)
+        try:
+            get_bigdata_intofile_for_code_and_date(c,date)
+        except:
+            pass
+        continue
+# for row in get_codelist('f:/data/code.csv'):
+#     print(row[1])
+#     try:
+#         get_bigdata_for_date(row[1])
+#     except :
+#         pass
+#     continue
 
-for row in get_codelist('f:/data/code.csv'):
-    print(row[1])
-    try:
-        get_bigdata_for_date(row[1])
-    except :
-        pass
-    continue
+get_bigdata_for_date('000004')

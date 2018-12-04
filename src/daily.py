@@ -1,5 +1,4 @@
 import tushare as ts
-import pandas as pd
 import os
 import csv
 def get_daily_info(c,code,sd,ed):
